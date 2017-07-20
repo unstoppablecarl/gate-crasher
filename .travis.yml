@@ -11,7 +11,7 @@ before_install:
   - composer self-update
 
 install:
-  - composer install --no-interaction --prefer-dist
+  - composer install --no-interaction --prefer-lowest
 
 before_script:
   - mkdir -p build/logs
