@@ -236,9 +236,17 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 [composer]: http://getcomposer.org/
 [contributors]: https://github.com/unstoppablecarl/gate-crasher/contributors
+[packagist]: https://packagist.org/packages/unstoppablecarl/gate-crasher
 
 [badge-source]: https://img.shields.io/badge/source-unstoppablecarl/gate-crasher-blue.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/unstoppablecarl/gate-crasher/master.svg?style=flat-square
 [badge-coverage]: https://img.shields.io/coveralls/unstoppablecarl/gate-crasher/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/unstoppablecarl/gate-crasher.svg?style=flat-square
+
+[source]: https://github.com/unstoppablecarl/gate-crasher
+[release]: https://packagist.org/packages/unstoppablecarl/gate-crasher
+[license]: https://github.com/unstoppablecarl/gate-crasher/blob/master/LICENSE
+[build]: https://travis-ci.org/unstoppablecarl/gate-crasher
+[coverage]: https://coveralls.io/r/unstoppablecarl/gate-crasher?branch=master
+[downloads]: https://packagist.org/packages/unstoppablecarl/gate-crasher
