@@ -26,7 +26,8 @@
     },
     "autoload": {
         "psr-4": {
-            "UnstoppableCarl\\GateCrasher\\": "src"
+            "UnstoppableCarl\\GateCrasher\\": "src",
+            "UnstoppableCarl\\GateCrasherExamples\\": "examples"
         }
     },
     "autoload-dev": {

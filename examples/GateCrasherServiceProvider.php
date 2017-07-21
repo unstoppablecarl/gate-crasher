@@ -1,12 +1,17 @@
 <?php
 
-namespace UnstoppableCarl\GateCrasher;
+namespace UnstoppableCarl\GateCrasherExamples;
 
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\ServiceProvider;
+use UnstoppableCarl\GateCrasher\GateCrasher;
+use UnstoppableCarl\GateCrasherExamples\Concerns\ProviderHasConfig;
 
 class GateCrasherServiceProvider extends ServiceProvider
 {
+    use ProviderHasConfig;
+
+    protected $configFilePath = __DIR__ . '/gate-crasher.php';
 
     /**
      * Register any authentication / authorization services.
@@ -15,12 +20,17 @@ class GateCrasherServiceProvider extends ServiceProvider
      */
     public function boot(Gate $gate)
     {
-        $superUserChecker = $this->superUserChecker();
-        $contextDefaults  = $this->contextDefaults();
-        $abilityOverrides = $this->abilityOverrides();
+        $superUserChecker = $this->config('super_user_checker', $this->superUserChecker());
+        $contextDefaults  = $this->config('context_defaults', $this->contextDefaults());
+        $abilityOverrides = $this->config('ability_overrides', $this->abilityOverrides());
 
         $gateCrasher = new GateCrasher($superUserChecker, $contextDefaults, $abilityOverrides);
         $gateCrasher->register($gate);
+    }
+
+    public function register()
+    {
+        $this->registerConfig();
     }
 
     /**

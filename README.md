@@ -15,8 +15,7 @@ When `Gate::allows()` is called, If the `$beforeCallback` returns a non-null res
 
 See [https://laravel.com/docs/5.2/authorization](https://laravel.com/docs/5.2/authorization)
 
-`Illuminate\Auth\Access\Gate::before()`
-See `Illuminate\Contracts\Auth\Access\Gate::before()` in the Laravel framework.
+See `Illuminate\Auth\Access\Gate::before()` and `Illuminate\Contracts\Auth\Access\Gate::before()` in the Laravel framework.
 
 ## Requirements
 
@@ -40,6 +39,7 @@ A Gate Crasher instance should be registered within the `boot()` method of a ser
 
 ```php
 <?php
+
 use Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider;
@@ -69,7 +69,8 @@ class GateCrasherServiceProvider extends ServiceProvider
         // set before callback using facade
         Gate::before($beforeCallback);
         
-        // PRO TIP: use `GateCrasher::register()` to create and set the before callback on a Gate instance for you
+        // PRO TIP: use `GateCrasher::register()`
+        // to create and set the before callback on a Gate instance for you
         $gateCrasher->register($gate);
     }
 }
@@ -79,6 +80,7 @@ The default configuration of a Gate Crasher instance creates the following behav
  
 ```php
 <?php
+
 // login a super user
 $gate = Gate::withUser($mySuperUser);
 
@@ -100,6 +102,7 @@ $gate->allows('delete', $someOtherSuperUser);
 
 ```php
 <?php
+
 use UnstoppableCarl\GateCrasher\GateCrasher;
 
 $superUserChecker = function ($user) {
@@ -108,7 +111,7 @@ $superUserChecker = function ($user) {
 
 // the default result of any ability checks in the given context
 $contextDefaults = [
-    // ignored if null falls back to default Gate::allows() check
+    // ignored if null, falls back to default Gate::allows() check
     GateCrasher::SUPER_USER__TARGETING__SELF           => null,
 
     // deny all abilities from non-super users targeting super users
@@ -157,6 +160,7 @@ This is an abstract description of how Gate Crasher works. See the source code f
 
 ```php
 <?php
+
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 Gate::allows('foo', $target);
