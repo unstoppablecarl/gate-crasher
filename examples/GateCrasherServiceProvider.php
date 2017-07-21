@@ -5,24 +5,24 @@ namespace UnstoppableCarl\GateCrasherExamples;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\ServiceProvider;
 use UnstoppableCarl\GateCrasher\GateCrasher;
-use UnstoppableCarl\GateCrasherExamples\Concerns\ProviderHasConfig;
+use Illuminate\Config\Repository;
 
 class GateCrasherServiceProvider extends ServiceProvider
 {
-    use ProviderHasConfig;
-
     protected $configFilePath = __DIR__ . '/gate-crasher.php';
 
     /**
-     * Register any authentication / authorization services.
-     * @param Gate $gate
-     * @return void
+     * @var Repository
      */
+    protected $config;
+
     public function boot(Gate $gate)
     {
-        $superUserChecker = $this->config('super_user_checker', $this->superUserChecker());
-        $contextDefaults  = $this->config('context_defaults', $this->contextDefaults());
-        $abilityOverrides = $this->config('ability_overrides', $this->abilityOverrides());
+        $config = $this->config;
+
+        $superUserChecker = $config->get('super_user_checker', $this->superUserChecker());
+        $contextDefaults  = $config->get('context_defaults', $this->contextDefaults());
+        $abilityOverrides = $config->get('ability_overrides', $this->abilityOverrides());
 
         $gateCrasher = new GateCrasher($superUserChecker, $contextDefaults, $abilityOverrides);
         $gateCrasher->register($gate);
@@ -30,7 +30,7 @@ class GateCrasherServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->registerConfig();
+        $this->config = $this->registerConfig($this->configFilePath);
     }
 
     /**
@@ -75,5 +75,20 @@ class GateCrasherServiceProvider extends ServiceProvider
                 'delete' => null,
             ],
         ];
+    }
+
+    protected function registerConfig($filePath = null)
+    {
+        $fileName = basename($filePath);
+        $key      = basename($fileName, '.php');
+
+        $this->publishes([
+            $filePath => config_path($fileName),
+        ]);
+
+        $this->mergeConfigFrom($filePath, $key);
+        $config = $this->app['config']->get($key);
+
+        return new Repository($config);
     }
 }

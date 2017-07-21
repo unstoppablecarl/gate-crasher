@@ -154,6 +154,10 @@ $gateCrasher->register($gate);
 ```
 ## Examples
 
+An example service provider is included here:
+ 
+[examples/GateCrasherServiceProvider.php](examples/GateCrasherServiceProvider.php)
+
 ## How It Works
 
 This is an abstract description of how Gate Crasher works. See the source code for exact details.
