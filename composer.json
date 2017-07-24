@@ -1,5 +1,5 @@
 {
-    "name": "unstoppable-carl/gate-crasher",
+    "name": "unstoppablecarl/gate-crasher",
     "version": "0.0.1",
     "description": "Safer Laravel superuser auth",
     "type": "library",
