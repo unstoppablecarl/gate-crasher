@@ -44,6 +44,9 @@
         "issues": "https://github.com/unstoppablecarl/gate-crasher/issues",
         "source": "https://github.com/unstoppablecarl/gate-crasher"
     },
+    "suggest": {
+        "unstoppablecarl/arbiter": "Manage User abilities that target Users"
+    },
     "scripts": {
         "phpunit": "phpunit",
         "phpcs": "phpcs src tests --standard=psr2 -sp --colors",

@@ -1,4 +1,5 @@
 # Gate Crasher
+
 Safer Laravel superuser auth.
 
 [![Source Code][badge-source]][source]
