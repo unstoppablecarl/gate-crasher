@@ -45,7 +45,7 @@
         "source": "https://github.com/unstoppablecarl/gate-crasher"
     },
     "suggest": {
-        "unstoppablecarl/arbiter": "Manage User abilities that target Users"
+        "unstoppablecarl/arbiter": "Manage Laravel User abilities that target Users"
     },
     "scripts": {
         "phpunit": "phpunit",
