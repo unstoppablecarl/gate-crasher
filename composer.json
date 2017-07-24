@@ -3,7 +3,13 @@
     "version": "0.0.1",
     "description": "superuser permission guards",
     "type": "library",
-    "keywords": ["laravel", "auth", "gate", "superuser", "policy"],
+    "keywords": [
+        "laravel",
+        "auth",
+        "gate",
+        "superuser",
+        "policy"
+    ],
     "homepage": "https://github.com/unstoppablecarl/gate-crasher",
     "license": "MIT",
     "authors": [
@@ -16,7 +22,6 @@
         "php": ">=5.6.4",
         "illuminate/support": ">=5.4",
         "illuminate/contracts": ">=5.4"
-
     },
     "require-dev": {
         "illuminate/auth": ">=5.4",
@@ -31,13 +36,14 @@
         }
     },
     "autoload-dev": {
-        "psr-4": {"UnstoppableCarl\\GateCrasher\\Tests\\": "tests/"}
+        "psr-4": {
+            "UnstoppableCarl\\GateCrasher\\Tests\\": "tests/"
+        }
     },
     "support": {
         "issues": "https://github.com/unstoppablecarl/gate-crasher/issues",
         "source": "https://github.com/unstoppablecarl/gate-crasher"
     },
-
     "scripts": {
         "phpunit": "phpunit",
         "phpcs": "phpcs src tests --standard=psr2 -sp --colors",
