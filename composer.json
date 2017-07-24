@@ -1,7 +1,7 @@
 {
     "name": "unstoppable-carl/gate-crasher",
     "version": "0.0.1",
-    "description": "superuser permission guards",
+    "description": "Safer Laravel superuser auth",
     "type": "library",
     "keywords": [
         "laravel",
