@@ -1,24 +1,51 @@
 language: php
 
-php:
-  - 5.6.4
-  - 7.0
-  - 7.1
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.composer/cache/files
+    - ${TRAVIS_BUILD_DIR}/travis/extension-cache
+
+matrix:
+  include:
+    - php: 5.6.4
+      env: LARAVEL_VERSION=5.4.* PHPUNIT_VERSION=~5.7
+    # PHP 7.0
+    - php: 7.0
+      env: LARAVEL_VERSION=5.4.* PHPUNIT_VERSION=~5.7
+    - php: 7.0
+      env: LARAVEL_VERSION=5.5.* PHPUNIT_VERSION=~6.0
+    # PHP 7.1
+    - php: 7.1
+      env: LARAVEL_VERSION=5.4.* PHPUNIT_VERSION=~5.7
+    - php: 7.1
+      env: LARAVEL_VERSION=5.5.* PHPUNIT_VERSION=~6.0
+    # PHP 7.2
+    - php: 7.2
+      env: LARAVEL_VERSION=5.4.* PHPUNIT_VERSION=~5.7
+    - php: 7.2
+      env: LARAVEL_VERSION=5.5.* PHPUNIT_VERSION=~6.0
+    - php: 7.2
+      env: LARAVEL_VERSION=5.6.* PHPUNIT_VERSION=~7.0 COVERAGE=true
 
 sudo: false
 
 before_install:
   - composer self-update
+  - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/xdebug.ini
+  - phpenv config-rm xdebug.ini
+  - composer require "laravel/laravel:${LARAVEL_VERSION}" --no-update --prefer-dist
+  - composer require "phpunit/phpunit:${PHPUNIT_VERSION}" --no-update --prefer-dist
 
 install:
-  - composer update --no-interaction --prefer-dist
+  - travis_retry composer update --no-interaction --prefer-dist
 
 before_script:
+  - phpenv config-add ~/xdebug.ini
   - mkdir -p build/logs
 
 script:
   - ./vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
   - ./vendor/bin/phpcs src tests --standard=psr2 -sp
 
-after_success:
-  - php vendor/bin/coveralls
+after_success: sh -c "if [ ! -z ${COVERAGE+x} ]; then php vendor/bin/coveralls; fi"
