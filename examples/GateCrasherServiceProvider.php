@@ -79,15 +79,17 @@ class GateCrasherServiceProvider extends ServiceProvider
 
     protected function registerConfig($filePath = null)
     {
-        $fileName = basename($filePath);
-        $key      = basename($fileName, '.php');
+        $app        = $this->app;
+        $fileName   = basename($filePath);
+        $key        = basename($fileName, '.php');
+        $configPath = $app->make('path.config');
 
         $this->publishes([
-            $filePath => config_path($fileName),
+            $filePath => $configPath . '/' . $fileName,
         ]);
 
         $this->mergeConfigFrom($filePath, $key);
-        $config = $this->app['config']->get($key);
+        $config = $app['config']->get($key);
 
         return new Repository($config);
     }
